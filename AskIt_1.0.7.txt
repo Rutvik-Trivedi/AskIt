@@ -1,0 +1,2594 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <string.h>
+#define print printf("Press any key to continue ")
+#define clear system("cls")
+#define flush fflush(stdin);fflush(stdout)
+
+
+/* Starting Version :- 1.0.0
+ * Latest Stable Version :- 1.0.7
+ * Created By Rutvik Trivedi.
+ * For Initial Version,
+ * Date Started :- April 6, 2018
+ * Date Completed :- April 8, 2018
+ */
+
+
+
+int main()
+{
+    char name[30], password[50], checking[50], newname[50], checking2[50], stars, message[] = "Your Answer is Still Pending", newpassword[50], temp[50], temp1[50], info[500], temp2[50], temp3[50];
+    char ch, Guest[]="Guest_ID_",ch1;
+    char message2[] = "No Personal Information yet added", gname[30];
+    char choice, sign, idc[50];
+    int i;
+    unsigned long int id;
+    int counter=0, c1=0, c2=0, c3=0, c4=0,c=0;
+    char q[5][60] = {"What is your Birth Year?",
+                     "What is your Mother's name?",
+                     "Which school did you attend for Primary education?",
+                     "Which is your favorite movie?",
+                     "Which is your favorite dish?"};
+    char answer[50], anscheck[50];
+    char email_check[2][5] = {"@",
+                              ".com"};
+    FILE *fp, *fp1, *fp2, *fp3;
+    printf("HELLO THERE! Welcome to AskIt! I am the developer of this App. People here call me RUTVIK......\n");
+    printf("In our forum, you will be able to ask any question related to any topic and our experts will revert back to you within 24 hours...\n");
+    printf("Press any key to enter the App.......\n");
+    getch();
+    system("cls");
+start:
+    printf("User, you will be able to do the following in this app :- \n");
+    printf("a. Sign up (create an account) to our Forum.\n");
+    printf("b. Log in as a Guest.\n");
+    printf("c. Ask any Question to our forum.\n");
+    printf("d. Ask any Question to our forum As a Guest.\n");
+    printf("e. Check answers of previously asked questions.\n");
+    printf("f. Check answers of questions asked as a Guest.\n");
+    printf("g. View all the questions asked by the Users and Guests.\n");
+    printf("h. Edit/View Profile Information.\n");
+    printf("i. Edit/View Personal Information.\n");
+    printf("j. Deactivate your Account.\n");
+    printf("k. Exit the App.\n");
+    printf("So, User, What would you like to do? :- ");
+
+//_____________________________________________________________________________________________________________________________________________________________________________________
+//______//_____________________________________________________________________________________________________________________________________________________________________________
+
+wrong1:
+    fflush(stdin);
+    choice = getch();
+    switch(choice)
+    {
+    case 'a':
+        clear;
+        goto signup;
+        break;
+    case 'b':
+        clear;
+        goto login_guest;
+        break;
+    case 'c':
+        system("cls");
+        goto ask;
+        break;
+    case 'd':
+        system("cls");
+        goto ask_guest;
+        break;
+    case 'e':
+        clear;
+        goto checkans;
+        break;
+    case 'f':
+        clear;
+        goto guest_check;
+        break;
+    case 'g':
+        clear;
+        goto view_all;
+        break;
+    case 'h':
+        system("cls");
+        goto profile_view;
+        break;
+    case 'i':
+        system("cls");
+        goto personal_edit;
+        break;
+    case 'j':
+        system("cls");
+        goto deactivate_account;
+        break;
+    case 'k':
+        system("cls");
+        goto exit_the_app;
+    default:
+        printf("\nUser, I am constantly developing this App to give you more options to choose. Until then, please choose from the available options :- ");
+        goto wrong1;
+        break;
+    }
+
+//_____________________________________________________________________________________________________________________________________________________________________________________________
+//_____________________________________________________________________________________________________________________________________________________________________________________________
+
+ask:
+    printf("Welcome to the FORUM.......\n");
+    printf("User, to ask any question, you will need to sign up for an account in the forum. So, if you have not created an account yet, we will direct you to the Sign Up section.\n");
+    printf("Else, you will be directed to the Login Section\n");
+    print;
+    getch();
+    printf("\nHave you already created an account? :- ");
+rutvik1:
+    sign = getch();
+    if(sign=='y' || sign=='Y')
+    {
+        system("cls");
+        printf("Directing to the Login Section. This may take a few moments................\n");
+        for(int j=0;j<60000;j++)
+        {
+            for(int k=0;k<24000;k++)
+            {}
+        }
+        system("cls");
+        goto login;
+    }
+    else if(sign=='n' || sign=='N')
+    {
+        printf("Have you logged in as a Guest before? :- ");
+        flush;
+        sign = getch();
+        if(sign=='n' || sign=='N')
+        {
+            printf("\nDirecting to the Sign Up Section. This may take a few moments...........\n");
+            for(int k=0;k<12000;k++)
+            {
+                for(int j=0;j<60000;j++) {}
+            }
+            system("cls");
+            goto signup;
+        }
+        else
+        {
+            clear;
+            printf("Directing to the Forum...........\n");
+            for(int i=0;i<12000;i++)
+            {
+                for(int j=0;j<60000;j++)
+                {}
+            }
+            clear;
+            goto guest_ask;
+        }
+    }
+    else
+    {
+        printf("Enter a Valid choice :- ");
+        goto rutvik1;
+    }
+
+//_________________________________________________________________________________________________________________________________________________________________________________________________
+//_________________________________________________________________________________________________________________________________________________________________________________________________
+guest_check:
+    printf("Guest, Please enter your AskIt ID to check questions previously asked by you :- ");
+    flush;
+rutvik3:
+    gets(gname);
+    fp3 = fopen(gname,"r");
+    if(fp3==0)
+    {
+        printf("Error fetching data. \n");
+        printf("Have you Logged in as a guest before in this App? :- ");
+        flush;
+        ch = getch();
+        if(ch=='n' || ch=='N')
+        {
+            printf("\nRedirecting to the SignUp Section...........");
+            for(int i=0;i<12000;i++)
+            {
+                for(int j=0;j<60000;j++)
+                {}
+            }
+            clear;
+            goto login_guest;
+        }
+        else
+        {
+            printf("\nPlease enter your Unique Guest ID provided to you at the time of the Login :- ");
+            flush;
+            goto rutvik3;
+        }
+    }
+    printf("Fetching your Answer details...........");
+    for(int i=0;i<12000;i++)
+    {
+        for(int j=0;j<60000;j++)
+        {}
+    }
+    clear;
+    while((ch=fgetc(fp3))!=EOF)
+        putchar(ch);
+    fclose(fp3);
+    printf("\n\n\n");
+    print;
+    getch();
+    clear;
+    printf("Redirecting you to the home page.....\n");
+    for(int i=0;i<12000;i++)
+    {
+        for(int j=0;j<60000;j++)
+        {}
+    }
+    system("cls");
+    goto start;
+
+//__________________________________________________________________________________________________________________________________________________________________________________________________
+//__________________________________________________________________________________________________________________________________________________________________________________________________
+login:
+    printf("Welcome to the Login Section. You will need to sign in to your account and then you may ask your questions..........\n");
+    print;
+    getch();
+    clear;
+
+once_more_2:
+    printf("Please enter your Username :- ");
+    fflush(stdin);
+    gets(name);
+    fp = fopen(name,"r");
+    if(fp==NULL)
+    {
+        printf("Error fetching data. Please create an account if you have not created one yet or try entering correct Username.\n");
+        printf("Would you like to enter Username once again? :- ");
+        fflush(stdin);
+        sign = getch();
+        if(sign=='y' || sign=='Y')
+        {
+            printf("\n");
+            goto once_more_2;
+        }
+        else
+        {
+            printf("\nRedirecting to the Sign Up Section..............\n");
+            for(int i=0;i<12000;i++)
+            {
+                for(int j=0;j<60000;j++)
+                {}
+            }
+            clear;
+            goto signup;
+        }
+    }
+    fclose(fp);
+    printf("Please enter your password :- ");
+
+//___________________________________________________________________________________________________________________________________________________________________________________________
+//___________________________________________________________________________________________________________________________________________________________________________________________
+
+wrong2:
+    fp = fopen(name,"r");
+    fflush(stdin);
+    strcpy(password,"");
+    i=0;
+    while(1)
+    {
+        ch=getch();
+        if(ch==13)
+        {
+            password[i]='\0';
+            break;
+        }
+        else
+        {
+            password[i]=ch;
+            i++;
+            putchar('*');
+        }
+    }
+    strcpy(checking,"");
+    i=0;
+    while((ch=fgetc(fp))!='\n')
+    {
+        checking[i] = ch;
+        i++;
+    }
+    checking[i]='\0';
+    if(strcmp(checking,password)==0)
+    {
+        counter=0;
+        printf("\nLogin successful. Redirecting to the forum..........\n");
+        strcpy(checking,"");
+        for(int i=0;i<12000;i++)
+        {
+            for(int j=0;j<60000;j++)
+            {}
+        }
+        clear;
+        fclose(fp);
+        goto askit;
+    }
+    else
+    {
+        fclose(fp);
+        counter++;
+        if(counter<3)
+        {
+            printf("\nUser, you have done %d unsuccessful attempts. Would you like to see the Password Hint? :- ",counter);
+            fflush(stdin);
+            ch = getch();
+            if(ch=='y' || ch=='Y')
+            {
+                printf("\nThe Password Hint is :- ");
+                strcpy(temp,name);
+                strcat(temp,"1");
+                fp1 = fopen(temp,"r");
+                while((ch=fgetc(fp1))!=EOF)
+                    putchar(ch);
+                putchar('\n');
+                fclose(fp1);
+                printf("Please enter the Password :- ");
+                goto wrong2;
+            }
+            else
+            {
+                printf("\nPlease enter the correct Password :- ");
+                goto wrong2;
+            }
+        }
+        else if(counter>=3)
+        {
+            printf("\nUser, you have done %d unsuccessful attempts. Did you forget your password? :- ",counter);
+            flush;
+            ch=getch();
+            if(ch=='Y' || ch=='y')
+            {
+                printf("\n\nPlease answer the security questions to reclaim your password.\n");
+                print;
+                flush;
+                getch();
+                clear;
+                strcpy(temp,name);
+                fp1 = fopen(strcat(temp,"123"),"r");
+                for(int integer=0;integer<5;integer++)
+                {
+                    flush;
+                    printf("\n%s\n",q[integer]);
+                    printf("Ans. ");
+                    flush;
+                    gets(answer);
+                    i=0;
+                    while((ch=fgetc(fp1))!='\n')
+                    {
+                        anscheck[i]=ch;
+                        i++;
+                    }
+                    anscheck[i] = '\0';
+                    if(strcmp(answer,anscheck)==0)
+                        c++;
+                    strcpy(anscheck,"");
+                    strcpy(answer,"");
+                }
+                fclose(fp1);
+                printf("\n");
+                printf("Verifying your answers.........\n");
+                for(int i=0;i<12000;i++)
+                {
+                    for(int j=0;j<60000;j++)
+                    {}
+                }
+                if(c==5)
+                {
+                    printf("User Verified\n");
+                    fp = fopen(name,"r");
+                    printf("Your Password is :- ");
+                    flush;
+                    while((ch=fgetc(fp))!='\n')
+                        putchar(ch);
+                    putchar('\n');
+                    fclose(fp);
+                    print;
+                    getch();
+                    clear;
+                    printf("Please enter your Password :- ");
+                    goto wrong2;
+                }
+                else
+                {
+                    clear;
+                    printf("Unable to Verify the User.\n");
+                    printf("Terminating your Gateway...........\n");
+                    for(int i=0;i<60000;i++)
+                    {
+                        for(int j=0;j<60000;j++)
+                        {}
+                    }
+                    clear;
+                    printf("Your session has been terminated. Please login once again\n");
+                    getch();
+                    clear;
+                    goto start;
+                }
+            }
+            else
+            {
+                clear;
+                printf("Terminating your Gateway...........\n");
+                for(int i=0;i<12000;i++)
+                {
+                    for(int j=0;j<60000;j++)
+                    {}
+                }
+                clear;
+                printf("Your session has been terminated. Please login once again\n");
+                getch();
+                clear;
+                goto start;
+            }
+        }
+        else
+        {
+            printf("\nWrong password. Please enter the correct password :- ");
+            goto wrong2;
+        }
+    }
+
+
+//_______________________________________________________________________________________________________________________________________________________________________________________________
+//_______________________________________________________________________________________________________________________________________________________________________________________________
+
+login_guest:
+    printf("Getting your AskIt ID...............");
+    for(int i=0;i<12000;i++)
+    {
+        for(int j=0;j<60000;j++)
+        {}
+    }
+    i=0;
+    fp2=fopen("ID.txt","r");
+    while((ch=fgetc(fp2))!=EOF)
+    {
+        idc[i]=ch;
+        i++;
+    }
+    idc[i]='\0';
+    fclose(fp2);
+    id = atoi(idc);
+    id++;
+    char buffer[50];
+    sprintf(buffer, "%lu", id);
+    fp2 = fopen("ID.txt","r+");
+    flush;
+    fputs(buffer,fp2);
+    fclose(fp2);
+    strcat(Guest,buffer);
+    strcpy(buffer,"");
+    fp = fopen("Usernames.txt","a");
+    fputs(Guest,fp);
+    fputc('\n',fp);
+    fclose(fp);
+    fp1 = fopen(Guest,"a");
+    fclose(fp1);
+    printf("\nGuest, your AskIt ID will be :- Guest_ID_%lu\n",id);
+    printf("Please note that for further updates and informations on your questions, the above AskIt ID will be used for login. So, please save this ID for further use.\n");
+    print;
+    flush;
+    getch();
+    clear;
+    printf("Guest, would you like to ask a question to our forum now? :- ");
+    ch = getch();
+    if(ch=='y' || ch=='Y')
+    {
+        clear;
+        printf("Redirecting to the Forum..............\n");
+        for(int i=0;i<12000;i++)
+        {
+            for(int j=0;j<60000;j++)
+            {}
+        }
+        clear;
+        goto guest_ask;
+    }
+    else
+    {
+        clear;
+        printf("Logging you out of the account..........\n");
+        for(int i=0;i<12000;i++)
+        {
+            for(int j=0;j<60000;j++)
+            {}
+        }
+        clear;
+        goto start;
+    }
+
+//______________________________________________________________________________________________________________________________________________________________________________________________
+//______________________________________________________________________________________________________________________________________________________________________________________________
+signup:
+    printf("Welcome to the Signup Section.\n");
+    printf("Here, you will be able to create an account to ask questions in the forum\n");
+    print;
+    getch();
+    clear;
+    printf("Please choose a Username for your account (Please ensure that Username should contain at least 5 characters) :- ");
+    strcpy(name,"");
+    strcpy(password,"");
+
+once_more:
+    fflush(stdin);
+    gets(name);
+    fp = fopen(name,"r");
+    if(fp==0)
+    {
+        fp3 = fopen("Usernames.txt","a");
+        fputs(name,fp3);
+        fputc('\n',fp3);
+        fclose(fp3);
+        fp=fopen(name,"w");
+        printf("Please choose a password for your account (Please ensure giving at least 6-7 characters as a strong and acceptable password) :- ");
+        fflush(stdin);
+        while((ch=getchar())!='\n')
+        {
+            putc(ch,fp);
+        }
+        putc('\n',fp);
+        fclose(fp);
+        strcpy(temp,name);
+        strcat(name,"1");
+        fp1 = fopen(name,"w");
+        printf("User, in case you forget the password, please enter a Password Hint to be displayed :- ");
+        fflush(stdin);
+        while((ch=getchar())!='\n')
+        {
+            fputc(ch,fp1);
+        }
+        fclose(fp1);
+        printf("The Account Informations are Submitted.\n");
+        printf("Would you like to add some of your Personal Information like Name, Residential Details and Contact Details? :- ");
+        fflush(stdin);
+        ch = getch();
+        strcat(name,"2");
+        fp = fopen(name,"w");
+        if(ch == 'Y' || ch=='y')
+        {
+            system("cls");
+            goto personal_add;
+        }
+        else
+        {
+            fputs(message2,fp);
+            fputc('\n',fp);
+            fclose(fp);
+            printf("\n");
+        }
+creation_account:
+        printf("User, please answer some security questions for reclaiming your password in case you forget it.\n");
+        fp = fopen(strcat(name,"3"),"w");
+        for(int integer=0;integer<5;integer++)
+        {
+            flush;
+            printf("\n%s\n",q[integer]);
+            printf("Ans. ");
+            flush;
+            while((ch=getchar())!='\n')
+                fputc(ch,fp);
+            fputc('\n',fp);
+        }
+        fclose(fp);
+        printf("\nPlease wait while your account is being created.......");
+        for(int i=0;i<12000;i++)
+        {
+            for(int j=0;j<60000;j++)
+            {}
+        }
+        printf("\nAccount is successfully created.\nRedirecting to the blog......\n");
+        for(int i=0;i<12000;i++)
+        {
+            for(int j=0;j<60000;j++)
+            {}
+        }
+        clear;
+        printf("%s, would you like to ask a question to our Forum now? :- ",temp);
+        strcpy(name,temp);
+        fflush(stdin);
+        ch = getch();
+        if(ch=='Y' || ch=='y')
+        {
+            clear;
+            goto askit;
+        }
+        else
+        {
+            printf("\nLogging you out of the account.......\n");
+            for(int j=0;j<6000;j++)
+            {
+                for(int k=0;k<60000;k++){}
+            }
+            clear;
+            printf("Redirecting to the Home Page.......\n");
+            for(int j=0;j<60000;j++)
+            {
+                for(int k=0;k<6000;k++){}
+            }
+            clear;
+            goto start;
+        }
+    }
+    else if(fp!=0)
+    {
+        fclose(fp);
+        printf("Username is already taken. Please choose a unique Username :- ");
+        goto once_more;
+    }
+    else if(strstr(name,Guest))
+    {
+        fclose(fp);
+        printf("User, you can not choose to have the words \"Guest_ID_\" in your Username as it is used to give Unique AskIt IDs to the Guest Login Members of AskIt.\n");
+        printf("Please enter another Username :- ");
+        goto once_more;
+    }
+
+//_______________________________________________________________________________________________________________________________________________________________________________________________
+//_______________________________________________________________________________________________________________________________________________________________________________________________
+
+personal_add:
+    printf("Please add your Personal Information here :- \n");
+    printf("Full Name :- ");
+    fputc('\n',fp);
+    fflush(stdin);
+    gets(info);
+    fputs(info,fp);     putc('\n',fp);   strcpy(info,"");
+    printf("Gender :- ");
+    fflush(stdin);
+    gets(info);
+    fputs(info,fp);     putc('\n',fp);   strcpy(info,"");
+    printf("Date Of Birth :- ");
+    fflush(stdin);
+    gets(info);
+    fputs(info,fp);     putc('\n',fp);   strcpy(info,"");
+    printf("City :- ");
+    fflush(stdin);
+    gets(info);
+    fputs(info,fp);     putc('\n',fp);  strcpy(info,"");
+    printf("State :- ");
+    fflush(stdin);
+    gets(info);
+    fputs(info,fp);     putc('\n',fp);  strcpy(info,"");
+    printf("Country :- ");
+    fflush(stdin);
+    gets(info);
+    fputs(info,fp);     putc('\n',fp);  strcpy(info,"");
+    printf("Contact Number :- ");
+    fflush(stdin);
+take2:
+    strcpy(info,"");
+    gets(info);
+    if(strlen(info)!=10)
+    {
+        printf("Please enter a valid 10 digit number :- ");
+        goto take2;
+    }
+    fputs(info,fp);     putc('\n',fp);  strcpy(info,"");
+    printf("E-Mail ID (Please enter a Valid Email) :- ");
+    fflush(stdin);
+take3:
+    gets(info);
+    int a=0;
+    for(int i=0;i<2;i++)
+    {
+        if(strstr(info,email_check[i]))
+            a++;
+    }
+    if(a!=2)
+    {
+        printf("Please enter a valid Email ID :- ");
+        goto take3;
+    }
+    fputs(info,fp);     putc('\n',fp);  strcpy(info,"");
+    fclose(fp);
+    printf("Updating your Details............\n");
+    for(int j=0;j<24000;j++)
+    {
+        for(int k=0;k<60000;k++) {}
+    }
+    clear;
+    goto creation_account;
+
+
+
+
+//_______________________________________________________________________________________________________________________________________________________________________________________________
+//_______________________________________________________________________________________________________________________________________________________________________________________________
+
+
+askit:
+    fp = fopen(name,"a");
+    printf("%s, you can ask your questions here.\n",name);
+    printf("Please enter the topic of your question :- ");
+    fputs("Topic :- ",fp);
+    fflush(stdin);
+    while((ch=getchar())!='\n')
+        putc(ch,fp);
+    fflush(stdin);
+    putc('\n',fp);
+    printf("Enter the question :- ");
+    fputs("Question :- ",fp);
+    fflush(stdin);
+    while((ch=getchar())!='\n')
+        putc(ch,fp);
+    putc('\n',fp);
+    fputs("Answer :- ",fp);
+    fputs(message,fp);
+    putc('\n',fp);
+    putc('\n',fp);
+    fclose(fp);
+    printf("Submitting your question..........");
+    for(int i=0;i<12000;i++)
+        {
+            for(int j=0;j<60000;j++)
+            {}
+        }
+    printf("\nYour question was successfully submitted. Thanks for posting your question. Our experts will revert to you as soon as possible.\n");
+    printf("\nLogging you out of the account.......\n");
+    for(int i=0;i<48000;i++)
+        {
+            for(int j=0;j<60000;j++)
+            {}
+        }
+    clear;
+    printf("Redirecting to the home page........\n");
+    for(int i=0;i<60000;i++)
+        {
+            for(int j=0;j<12000;j++)
+            {}
+        }
+    clear;
+    goto start;
+
+
+//_________________________________________________________________________________________________________________________________________________________________________________________
+//_________________________________________________________________________________________________________________________________________________________________________________________
+guest_ask:
+    fp3=fopen(Guest,"a");
+    printf("Please enter the topic of your question :- ");
+    fputs("Topic :- ",fp3);
+    fflush(stdin);
+    while((ch=getchar())!='\n')
+        putc(ch,fp3);
+    fflush(stdin);
+    putc('\n',fp3);
+    printf("Enter the question :- ");
+    fputs("Question :- ",fp3);
+    fflush(stdin);
+    while((ch=getchar())!='\n')
+        putc(ch,fp3);
+    putc('\n',fp3);
+    fputs("Answer :- ",fp3);
+    fputs(message,fp3);
+    putc('\n',fp3);
+    putc('\n',fp3);
+    fclose(fp3);
+    printf("Submitting your question..........");
+    for(int i=0;i<12000;i++)
+        {
+            for(int j=0;j<60000;j++)
+            {}
+        }
+    printf("\nYour question was successfully submitted. Thanks for posting your question. Our experts will revert to you as soon as possible.\n");
+    printf("\nLogging you out of the account.......\n");
+    for(int i=0;i<48000;i++)
+        {
+            for(int j=0;j<60000;j++)
+            {}
+        }
+    clear;
+    printf("Redirecting to the home page........\n");
+    for(int i=0;i<60000;i++)
+        {
+            for(int j=0;j<12000;j++)
+            {}
+        }
+    clear;
+    goto start;
+//________________________________________________________________________________________________________________________________________________________________________________________
+//________________________________________________________________________________________________________________________________________________________________________________________
+ask_guest:
+    printf("Guest, please enter your Unique Guest ID generated while logging in as a Guest :- ");
+    flush;
+rutvik2:
+    gets(gname);
+    fp2 = fopen(gname,"r");
+    if(fp2==0)
+    {
+        printf("Error fetching data. Guest, if you do not have a Guest Account, we will direct you to the Guest Login Section. Else, you need to enter your correct Guest ID.\n");
+        printf("Have you already created a Guest Account? :- ");
+        ch = getch();
+        if(ch=='y' || ch=='Y')
+        {
+            printf("\nGuest, please enter your correct Guest ID :- ");
+            goto rutvik2;
+        }
+        else
+        {
+            clear;
+            printf("Redirecting to the Guest Login Section........\n");
+            for(int i=0;i<60000;i++)
+            {
+                for(int j=0;j<12000;j++)
+                {}
+            }
+            clear;
+            goto login_guest;
+        }
+    }
+    else
+    {
+        fclose(fp2);
+        fp2 = fopen(gname,"a");
+        printf("Login Successful. Redirecting to the Blog.........\n");
+        for(int i=0;i<60000;i++)
+            {
+                for(int j=0;j<12000;j++)
+                {}
+            }
+        clear;
+        printf("Please enter the topic of your question :- ");
+        fflush(stdin);
+        while((ch=getchar())!='\n')
+            putc(ch,fp2);
+        fflush(stdin);
+        putc('\n',fp2);
+        printf("Enter the question :- ");
+        fflush(stdin);
+        while((ch=getchar())!='\n')
+            putc(ch,fp2);
+        putc('\n',fp2);
+        fputs(message,fp2);
+        putc('\n',fp2);
+        putc('\n',fp2);
+        fclose(fp2);
+        printf("Submitting your question..........");
+        for(int i=0;i<12000;i++)
+        {
+            for(int j=0;j<60000;j++)
+            {}
+        }
+        printf("\nYour question was successfully submitted. Thanks for posting your question. Our experts will revert to you as soon as possible.\n");
+        printf("\nLogging you out of the account.......\n");
+        for(int i=0;i<48000;i++)
+        {
+            for(int j=0;j<60000;j++)
+            {}
+        }
+        clear;
+        printf("Redirecting to the home page........\n");
+        for(int i=0;i<60000;i++)
+        {
+            for(int j=0;j<12000;j++)
+            {}
+        }
+        clear;
+        goto start;
+    }
+
+
+
+//_________________________________________________________________________________________________________________________________________________________________________________________
+//_________________________________________________________________________________________________________________________________________________________________________________________
+
+checkans:
+    printf("User, here you will be able to check answers of your previously asked questions.\n");
+    printf("You will need to login to your account to check the answers.\n");
+    print;
+    getch();
+    clear;
+    printf("User, have you already created an account? :- ");
+    ch = getch();
+    if(ch=='n' || ch=='N')
+    {
+        printf("\nPlease create an account and ask a question to use this feature.\n");
+        print;
+        flush;
+        getch();
+        clear;
+        printf("Redirecting to the SignUp Section...........\n");
+        for(int i=0;i<60000;i++)
+        {
+            for(int j=0;j<12000;j++)
+            {}
+        }
+        clear;
+        goto signup;
+    }
+wrong3:
+    printf("\nEnter your Username :- ");
+    fflush(stdin);
+    strcpy(name,"");
+    gets(name);
+    fp = fopen(name,"r");
+    if(fp==0)
+    {
+        printf("Error fetching data. Try correct Username or create an account if you have not created yet.\n");
+        printf("1. Enter username once again.\n");
+        printf("2. Create a new account.\n");
+        printf("What is your choice? :- ");
+    wrong4:
+        fflush(stdin);
+        choice = getch();
+        switch(choice)
+        {
+        case '1':
+            clear;
+            goto wrong3;
+            break;
+        case '2':
+            clear;
+            goto signup;
+            break;
+        default:
+            printf("\nEnter a valid choice :- ");
+            goto wrong4;
+            break;
+        }
+    }
+    else
+        fclose(fp);
+    fflush(stdin);
+    printf("Enter your password :- ");
+
+wrong5:
+    fp= fopen(name,"r");
+    flush;
+    strcpy(password,"");
+    strcpy(checking,"");
+    i=0;
+    while(1)
+    {
+        ch=getch();
+        if(ch==13)
+        {
+            password[i]='\0';
+            break;
+        }
+        else
+        {
+            password[i]=ch;
+            i++;
+            putchar('*');
+        }
+    }
+    fseek(fp,SEEK_SET,SEEK_CUR);
+    i=0;
+    while(1)
+    {
+        ch=fgetc(fp);
+        if(ch=='\n')
+            break;
+        else
+        {
+            checking[i]=ch;
+            i++;
+        }
+    }
+    checking[i]='\0';
+    fflush(stdout);
+    fflush(stdin);
+    counter=0;
+    if(strcmp(checking,password) == 0)
+    {
+        c1=0;
+        printf("\nLogin Successful...\n");
+        printf("\nFetching your answer details.........\n");
+        for(int i=0;i<48000;i++)
+        {
+            for(int j=0;j<60000;j++)
+            {}
+        }
+        clear;
+        while((ch=fgetc(fp))!=EOF)
+        putchar(ch);
+        fclose(fp);
+        printf("\n\n\n");
+        print;
+        getch();
+        clear;
+        printf("Redirecting you to the home page.....\n");
+        for(int i=0;i<12000;i++)
+            {
+                for(int j=0;j<60000;j++)
+                {}
+            }
+        system("cls");
+        goto start;
+    }
+    else
+    {
+        c1++;
+        if(c1<3)
+        {
+            fclose(fp);
+            printf("\nUser, you have done %d unsuccessful attempts. Would you like to see the Password Hint? :- ",c1);
+            fflush(stdin);
+            ch = getch();
+            if(ch=='y' || ch=='Y')
+            {
+                printf("\nThe Password Hint is :- ");
+                strcpy(temp,name);
+                strcat(temp,"1");
+                fp1 = fopen(temp,"r");
+                while((ch=fgetc(fp1))!=EOF)
+                    putchar(ch);
+                putchar('\n');
+                fclose(fp1);
+                printf("Please enter the Password :- ");
+                goto wrong5;
+            }
+            else
+            {
+                fclose(fp);
+                printf("\nPlease enter the correct Password :- ");
+                goto wrong5;
+            }
+        }
+        else if(c1>=3)
+        {
+            c=0;
+            printf("\nUser, you have done %d unsuccessful attempts. Did you forget your password? :- ",c1);
+            flush;
+            ch=getch();
+            if(ch=='Y' || ch=='y')
+            {
+                c=0;
+                printf("\n\nPlease answer the security questions to reclaim your password.\n");
+                print;
+                flush;
+                getch();
+                clear;
+                strcpy(temp,name);
+                fp1 = fopen(strcat(temp,"123"),"r");
+                for(int integer=0;integer<5;integer++)
+                {
+                    flush;
+                    printf("\n%s\n",q[integer]);
+                    printf("Ans. ");
+                    flush;
+                    gets(answer);
+                    i=0;
+                    while((ch=fgetc(fp1))!='\n')
+                    {
+                        anscheck[i]=ch;
+                        i++;
+                    }
+                    anscheck[i] = '\0';
+                    if(strcmp(answer,anscheck)==0)
+                        c++;
+                    strcpy(anscheck,"");
+                    strcpy(answer,"");
+                }
+                fclose(fp1);
+                printf("\n");
+                printf("Verifying your answers.........\n");
+                for(int i=0;i<12000;i++)
+                {
+                    for(int j=0;j<60000;j++)
+                    {}
+                }
+                if(c==53)
+                {
+                    printf("User Verified\n");
+                    fp = fopen(name,"r");
+                    printf("Your Password is :- ");
+                    flush;
+                    while((ch=fgetc(fp))!='\n')
+                        putchar(ch);
+                    putchar('\n');
+                    fclose(fp);
+                    print;
+                    getch();
+                    clear;
+                    printf("Please enter your Password :- ");
+                    goto wrong5;
+                }
+                else
+                {
+                    clear;
+                    printf("Unable to Verify the User.\n");
+                    printf("Terminating your Gateway...........\n");
+                    for(int i=0;i<60000;i++)
+                    {
+                        for(int j=0;j<60000;j++)
+                        {}
+                    }
+                    clear;
+                    printf("Your session has been terminated. Please login once again\n");
+                    getch();
+                    clear;
+                    goto start;
+                }
+            }
+            else
+            {
+                clear;
+                printf("Terminating your Gateway...........\n");
+                for(int i=0;i<12000;i++)
+                {
+                    for(int j=0;j<60000;j++)
+                    {}
+                }
+                clear;
+                printf("Your session has been terminated. Please login once again\n");
+                getch();
+                clear;
+                goto start;
+            }
+        }
+        else
+        {
+            fclose(fp);
+            printf("\nWrong password. Please enter correct password :- ");
+            goto wrong5;
+        }
+    }
+
+//________________________________________________________________________________________________________________________________________________________________________________________________
+//________________________________________________________________________________________________________________________________________________________________________________________________
+view_all:
+    printf("User, here you will be able to view all the questions and answers asked in AskIt by all its Users and Guests.\n");
+    print;
+    flush;
+    getch();
+    clear;
+    printf("Fetching User and Guest answer details................\n\n");
+    for(int i=0;i<24000;i++)
+    {
+        for(int j=0;j<60000;j++)
+        {}
+    }
+    fp=fopen("Usernames.txt","r");
+    strcpy(name,"");
+    ch = '5';
+    while(ch!=EOF)
+    {
+        i=0;
+        if((ch=fgetc(fp))!=EOF)
+        {
+            name[i]=ch;
+            i++;
+        }
+        else
+            break;
+        flush;
+        while((ch=fgetc(fp))!='\n')
+        {
+            name[i]=ch;
+            i++;
+        }
+        name[i]='\0';
+        fp1=fopen(name,"r");
+        if(fp1!=0)
+        {
+            if(!(strstr(name,Guest)))
+            {
+                flush;
+                while((ch1=fgetc(fp1))!='\n') {}
+            }
+            flush;
+            while((ch1=fgetc(fp1))!=EOF)
+                putchar(ch1);
+            putchar('\n');
+            putchar('\n');
+            fclose(fp1);
+            strcpy(name,"");
+        }
+    }
+    fclose(fp);
+    printf("\n\n");
+    print;
+    flush;
+    getch();
+    clear;
+    printf("Redirecting to the Home Page.............\n");
+    for(int i=0;i<24000;i++)
+    {
+        for(int j=0;j<60000;j++)
+        {}
+    }
+    clear;
+    goto start;
+//_______________________________________________________________________________________________________________________________________________________________________________________________
+//_______________________________________________________________________________________________________________________________________________________________________________________________
+
+profile_view:
+
+    printf("User, please login to your account to view your profile information\n");
+
+once_more_4:
+
+    printf("Please enter your Username :- ");
+    fflush(stdin);
+    gets(name);
+    if(strstr(name,Guest))
+    {
+        printf("Guest, the option for viewing the profile and editing it is only available for the Account Holding members and not the Guest Members. So, for using this feature, please create an account first.\n");
+        print;
+        flush;
+        getch();
+        clear;
+        strcpy(name,"");
+        printf("Redirecting to the Home Page..............\n");
+        for(int i=0;i<24000;i++)
+        {
+            for(int j=0;j<60000;j++)
+            {}
+        }
+        clear;
+        goto start;
+    }
+    fp = fopen(name,"r");
+    if(fp==NULL)
+    {
+        printf("Error fetching data. Please create an account if you have not created one yet or try entering correct Username.\n");
+        printf("Would you like to enter Username once again? :- ");
+        fflush(stdin);
+        sign = getch();
+        if(sign=='y' || sign=='Y')
+        {
+            printf("\n");
+            goto once_more_4;
+        }
+        else
+        {
+            printf("\nRedirecting to the Sign Up Section..............\n");
+            for(int i=0;i<24000;i++)
+            {
+                for(int j=0;j<60000;j++)
+                {}
+            }
+            clear;
+            goto signup;
+        }
+    }
+    else
+        fclose(fp);
+    printf("Please enter your password :- ");
+
+//___________________________________________________________________________________________________________________________________________________________________________________
+//___________________________________________________________________________________________________________________________________________________________________________________________
+
+incorrect_password:
+    fp = fopen(name,"r");
+    fflush(stdin);
+    fflush(stdout);
+    strcpy(password,"");
+    strcpy(checking,"");
+    i=0;
+    while(1)
+    {
+        ch=getch();
+        if(ch==13)
+        {
+            password[i]='\0';
+            break;
+        }
+        else
+        {
+            password[i]=ch;
+            i++;
+            putchar('*');
+        }
+    }
+    flush;
+    i=0;
+    while((ch=fgetc(fp))!='\n')
+    {
+        checking[i] = ch;
+        i++;
+    }
+    checking[i]='\0';
+    counter=0;
+    if(strcmp(checking,password)==0)
+    {
+        c2=0;
+        printf("\nLogin successful. Fetching Profile information..........\n");
+        strcpy(checking,"");
+        for(int i=0;i<60000;i++)
+        {
+            for(int j=0;j<6000;j++)
+            {}
+        }
+        clear;
+        fclose(fp);
+        printf("Profile Information :: Details : ");
+        printf("\nUsername :- %s\n",name);
+        printf("Password :- %s\n\n",password);
+        printf("1. Edit Profile Information.\n");
+        printf("2. Go to the Homepage\n");
+        printf("%s, what would you like to do? :- \n",name);
+    wrong6:
+        fflush(stdin);
+        choice = getch();
+        switch(choice)
+        {
+        case '1':
+            system("cls");
+            goto edit_info;
+            break;
+        case '2':
+            system("cls");
+            printf("Logging you out of the Account and Redirecting to the Home Page.........");
+            for(int j=0;j<6000;j++)
+            {
+                for(int k=0;k<60000;k++){}
+            }
+            system("cls");
+            goto start;
+            break;
+        default:
+            printf("\nPlease enter the correct choice :- ");
+            goto wrong6;
+            break;
+        }
+    }
+    else
+    {
+        c2++;
+        if(c2<3)
+        {
+            printf("\nUser, you have done %d unsuccessful attempts. Would you like to see the Password Hint? :- ",c2);
+            fflush(stdin);
+            ch = getch();
+            if(ch=='y' || ch=='Y')
+            {
+                printf("\nThe Password Hint is :- ");
+                strcpy(temp,name);
+                strcat(temp,"1");
+                fp1 = fopen(temp,"r");
+                while((ch=fgetc(fp1))!=EOF)
+                    putchar(ch);
+                putchar('\n');
+                fclose(fp1);
+                printf("Please enter the Password :- ");
+                goto incorrect_password;
+            }
+            else
+            {
+                printf("\nPlease enter the correct Password :- ");
+                goto incorrect_password;
+            }
+        }
+        else if(c2>=3)
+        {
+            c=0;
+            printf("\nUser, you have done %d unsuccessful attempts. Did you forget your password? :- ",c2);
+            flush;
+            ch=getch();
+            if(ch=='Y' || ch=='y')
+            {
+                printf("\n\nPlease answer the security questions to reclaim your password.\n");
+                print;
+                flush;
+                getch();
+                clear;
+                strcpy(temp,name);
+                fp1 = fopen(strcat(temp,"123"),"r");
+                for(int integer=0;integer<5;integer++)
+                {
+                    flush;
+                    printf("\n%s\n",q[integer]);
+                    printf("Ans. ");
+                    flush;
+                    gets(answer);
+                    i=0;
+                    while((ch=fgetc(fp1))!='\n')
+                    {
+                        anscheck[i]=ch;
+                        i++;
+                    }
+                    anscheck[i] = '\0';
+                    if(strcmp(answer,anscheck)==0)
+                        c++;
+                    strcpy(anscheck,"");
+                    strcpy(answer,"");
+                }
+                fclose(fp1);
+                printf("\n");
+                printf("Verifying your answers.........\n");
+                for(int i=0;i<12000;i++)
+                {
+                    for(int j=0;j<60000;j++)
+                    {}
+                }
+                if(c==5)
+                {
+                    printf("User Verified\n");
+                    fp = fopen(name,"r");
+                    printf("Your Password is :- ");
+                    flush;
+                    while((ch=fgetc(fp))!='\n')
+                        putchar(ch);
+                    putchar('\n');
+                    fclose(fp);
+                    print;
+                    getch();
+                    clear;
+                    printf("Please enter your Password :- ");
+                    goto incorrect_password;
+                }
+                else
+                {
+                    clear;
+                    printf("Unable to Verify the User.\n");
+                    printf("Terminating your Gateway...........\n");
+                    for(int i=0;i<60000;i++)
+                    {
+                        for(int j=0;j<60000;j++)
+                        {}
+                    }
+                    clear;
+                    printf("Your session has been terminated. Please login once again\n");
+                    getch();
+                    clear;
+                    goto start;
+                }
+            }
+            else
+            {
+                clear;
+                printf("Terminating your Gateway...........\n");
+                for(int i=0;i<12000;i++)
+                {
+                    for(int j=0;j<60000;j++)
+                    {}
+                }
+                clear;
+                printf("Your session has been terminated. Please login once again\n");
+                getch();
+                clear;
+                goto start;
+            }
+        }
+        else
+        {
+            fclose(fp);
+            printf("\nWrong password. Please enter the correct password :- ");
+            goto incorrect_password;
+        }
+    }
+
+
+//________________________________________________________________________________________________________________________________________________________________________________________________
+//________________________________________________________________________________________________________________________________________________________________________________________________
+
+edit_info:
+    printf("%s, here are your Options :- \n",name);
+    printf("1. User Name\n");
+    printf("2. Password\n");
+    printf("What would you like to edit? :- ");
+wrong7:
+    fflush(stdin);
+    choice = getch();
+    switch(choice)
+    {
+    case '1':
+        clear;
+        goto edit_username;
+        break;
+    case '2':
+        clear;
+        goto edit_password;
+        break;
+    default:
+        printf("\nPlease enter a valid choice :- ");
+        goto wrong7;
+        break;
+    }
+
+
+//________________________________________________________________________________________________________________________________________________________________________________________________
+//________________________________________________________________________________________________________________________________________________________________________________________________
+
+edit_username:
+    printf("Confirm by Re-entering your current Username :- ");
+    fflush(stdin);
+
+wrong8:
+    strcpy(name,"");
+    gets(name);
+    fp = fopen(name,"r");
+    strcpy(temp,"");
+    strcpy(temp,name);
+    strcpy(temp2,name);
+    strcat(temp2,"feedback");
+    if(fp==0)
+    {
+        printf("\nPlease enter the correct current Username to confirm your edit :- ");
+        goto wrong8;
+    }
+    fp2 = fopen(strcat(temp,"1"),"r");
+    printf("Enter your new Username :- ");
+once_more_3:
+    fflush(stdin);
+    gets(newname);
+    fp1 = fopen(newname,"r");
+    strcpy(temp1,newname);
+    if(fp1)
+    {
+        printf("\nUsername seems to be already taken. Try another Username :- ");
+        goto once_more_3;
+    }
+    fclose(fp1);
+    fp1 = fopen(newname,"w");
+    fp3 = fopen(strcat(temp1,"1"),"w");
+    while((ch=fgetc(fp))!=EOF)
+        putc(ch,fp1);
+    while((ch=fgetc(fp2))!=EOF)
+        putc(ch,fp3);
+    fclose(fp1);
+    fclose(fp);
+    fclose(fp2);
+    fclose(fp3);
+    remove(name);
+    remove(temp);
+    fp1 = fopen(strcat(temp,"2"),"r");
+    fp = fopen(strcat(temp1,"2"),"w");
+    while((ch=fgetc(fp1))!=EOF)
+        putc(ch,fp);
+    fclose(fp);
+    fclose(fp1);
+    remove(temp);
+    fp1 = fopen(strcat(temp,"3"),"r");
+    fp = fopen(strcat(temp1,"3"),"w");
+    while((ch=fgetc(fp1))!=EOF)
+        putc(ch,fp);
+    fclose(fp);
+    fclose(fp1);
+    remove(temp);
+    if((fp3=fopen(temp2,"r"))!=0)
+    {
+        strcpy(temp3,newname);
+        strcat(temp3,"feedback");
+        fp2 = fopen(temp3,"w");
+        while((ch=fgetc(fp3))!=EOF)
+            putc(ch,fp2);
+        fclose(fp2);
+        fclose(fp3);
+        remove(temp2);
+    }
+    printf("Changing Username.........\n");
+    for(int j=0;j<6000;j++)
+    {
+        for(int k=0;k<60000;k++){}
+    }
+    printf("Username Successfully changed. Your new Username is %s\n",newname);
+    fp1 = fopen("Usernames.txt","a");
+    fputs(newname,fp1);
+    fputc('\n',fp1);
+    fclose(fp1);
+    print;
+    fflush(stdin);
+    getch();
+    printf("\nRedirecting to the Home page.........\n");
+    for(int j=0;j<6000;j++)
+    {
+        for(int k=0;k<60000;k++){}
+    }
+    clear;
+    goto start;
+
+
+//_________________________________________________________________________________________________________________________________________________________________________________________________
+//_________________________________________________________________________________________________________________________________________________________________________________________________
+
+edit_password:
+
+    printf("Enter your current Password to confirm the Edit :- ");
+
+wrong9:
+    fflush(stdin);
+    strcpy(checking2,"");
+    gets(checking2);
+    counter=0;
+    if(strcmp(password,checking2)==0)
+    {
+        c3=0;
+        fflush(stdout);
+        fp=fopen(name,"r+");
+        //printf("%ld",ftell(fp));
+        printf("Enter the new Password :- ");
+        flush;
+        strcpy(newpassword,"");
+        gets(newpassword);
+        fputs(newpassword,fp);
+        //fflush(stdin);
+        putc('\n',fp);
+        fclose(fp);
+        printf("Please edit your Password Hint :- ");
+        strcpy(temp,"");
+        strcpy(temp,name);
+        fp1 = fopen(strcat(temp,"1"),"w");
+        fflush(stdin);
+        while((ch=getchar())!='\n')
+            fputc(ch,fp1);
+        fclose(fp1);
+        strcpy(temp,"");
+        printf("\nChanging your Password..............");
+        for(int j=0;j<6000;j++)
+        {
+            for(int k=0;k<60000;k++){}
+        }
+        printf("\nPassword and Password Hint are successfully changed. Please use the new Password to login to your account from now on.\n");
+        printf("Press any key to go to the Home Page\n");
+        getch();
+        clear;
+        printf("Redirecting to the Home Page................\n");
+        for(int j=0;j<6000;j++)
+        {
+            for(int k=0;k<60000;k++){}
+        }
+        fflush(stdin);
+        clear;
+        goto start;
+    }
+    else
+    {
+        c3++;
+        if(c3<3)
+        {
+            printf("\nUser, you have done %d unsuccessful attempts. Would you like to see the Password Hint? :- ",c3);
+            fflush(stdin);
+            ch = getch();
+            if(ch=='y' || ch=='Y')
+            {
+                printf("\nThe Password Hint is :- ");
+                strcpy(temp,name);
+                strcat(temp,"1");
+                fp1 = fopen(temp,"r");
+                while((ch=fgetc(fp1))!=EOF)
+                    putchar(ch);
+                putchar('\n');
+                fclose(fp1);
+                printf("Please enter the Password :- ");
+                goto wrong9;
+            }
+            else
+            {
+                printf("\nPlease enter the correct Password :- ");
+                goto wrong9;
+            }
+        }
+        else if(c3>=3)
+        {
+            c=0;
+            printf("\nUser, you have done %d unsuccessful attempts. Did you forget your password? :- ",counter);
+            flush;
+            ch=getch();
+            if(ch=='Y' || ch=='y')
+            {
+                printf("\n\nPlease answer the security questions to reclaim your password.\n");
+                print;
+                flush;
+                getch();
+                clear;
+                strcpy(temp,name);
+                fp1 = fopen(strcat(temp,"123"),"r");
+                for(int integer=0;integer<5;integer++)
+                {
+                    flush;
+                    printf("\n%s\n",q[integer]);
+                    printf("Ans. ");
+                    flush;
+                    gets(answer);
+                    i=0;
+                    while((ch=fgetc(fp1))!='\n')
+                    {
+                        anscheck[i]=ch;
+                        i++;
+                    }
+                    anscheck[i] = '\0';
+                    if(strcmp(answer,anscheck)==0)
+                        c++;
+                    strcpy(anscheck,"");
+                    strcpy(answer,"");
+                }
+                fclose(fp1);
+                printf("\n");
+                printf("Verifying your answers.........\n");
+                for(int i=0;i<12000;i++)
+                {
+                    for(int j=0;j<60000;j++)
+                    {}
+                }
+                if(c==5)
+                {
+                    printf("User Verified\n");
+                    fp = fopen(name,"r");
+                    printf("Your Password is :- ");
+                    flush;
+                    while((ch=fgetc(fp))!='\n')
+                        putchar(ch);
+                    putchar('\n');
+                    fclose(fp);
+                    print;
+                    getch();
+                    clear;
+                    printf("Please enter your Password :- ");
+                    goto wrong9;
+                }
+                else
+                {
+                    clear;
+                    printf("Unable to Verify the User.\n");
+                    printf("Terminating your Gateway...........\n");
+                    for(int i=0;i<60000;i++)
+                    {
+                        for(int j=0;j<60000;j++)
+                        {}
+                    }
+                    clear;
+                    printf("Your session has been terminated. Please login once again\n");
+                    getch();
+                    clear;
+                    goto start;
+                }
+            }
+            else
+            {
+                clear;
+                printf("Terminating your Gateway...........\n");
+                for(int i=0;i<12000;i++)
+                {
+                    for(int j=0;j<60000;j++)
+                    {}
+                }
+                clear;
+                printf("Your session has been terminated. Please login once again\n");
+                getch();
+                clear;
+                goto start;
+            }
+        }
+        else
+        {
+            printf("Please enter your correct current Password to confirm the Edit :- ");
+            goto wrong9;
+        }
+    }
+
+//_________________________________________________________________________________________________________________________________________________________________________________________________
+//_________________________________________________________________________________________________________________________________________________________________________________________________
+
+personal_edit:
+    printf("User, you need to log in to your Account to View or Edit your Personal Information.\n");
+    print;
+    getch();
+once_more_6:
+    clear;
+    printf("Please enter your Username :- ");
+    fflush(stdin);
+    gets(name);
+    if(strstr(name,Guest))
+    {
+        printf("Guest, the option for viewing and editing the Personal Information is only available for the Account Holding members and not the Guest Members. So, for using this feature, please create an account first.\n");
+        print;
+        flush;
+        getch();
+        clear;
+        strcpy(name,"");
+        printf("Redirecting to the Home Page.................\n");
+        for(int i=0;i<12000;i++)
+        {
+            for(int j=0;j<60000;j++)
+            {}
+        }
+        clear;
+        goto start;
+    }
+    fp = fopen(name,"r");
+    if(fp==NULL)
+    {
+        printf("Error fetching data. Please create an account if you have not created one yet or try entering correct Username.\n");
+        printf("Would you like to enter Username once again? :- ");
+        fflush(stdin);
+        sign = getch();
+        if(sign=='y' || sign=='Y')
+        {
+            printf("\n");
+            goto once_more_6;
+        }
+        else
+        {
+            printf("\nRedirecting to the Sign Up Section..............\n");
+            for(int i=0;i<12000;i++)
+            {
+                for(int j=0;j<60000;j++)
+                {}
+            }
+            clear;
+            goto signup;
+        }
+    }
+    fclose(fp);
+    printf("Please enter your password :- ");
+
+//___________________________________________________________________________________________________________________________________________________________________________________________
+//___________________________________________________________________________________________________________________________________________________________________________________________
+
+rwrong:
+    fp = fopen(name,"r");
+    fflush(stdin);
+    strcpy(password,"");
+    i=0;
+    while(1)
+    {
+        ch=getch();
+        if(ch==13)
+        {
+            password[i]='\0';
+            break;
+        }
+        else
+        {
+            password[i]=ch;
+            i++;
+            putchar('*');
+        }
+    }
+    strcpy(checking,"");
+    i=0;
+    while((ch=fgetc(fp))!='\n')
+    {
+        checking[i] = ch;
+        i++;
+    }
+    checking[i]='\0';
+    if(strcmp(checking,password)==0)
+    {
+        counter=0;
+        printf("\nLogin successful. Fetching your Personal Informations.......\n");
+        strcpy(checking,"");
+        for(int i=0;i<48000;i++)
+        {
+            for(int j=0;j<60000;j++)
+            {}
+        }
+        clear;
+        fclose(fp);
+        goto view_personal;
+    }
+    else
+    {
+        fclose(fp);
+        counter++;
+        if(counter<3)
+        {
+            printf("\nUser, you have done %d unsuccessful attempts. Would you like to see the Password Hint? :- ",counter);
+            fflush(stdin);
+            ch = getch();
+            if(ch=='y' || ch=='Y')
+            {
+                printf("\nThe Password Hint is :- ");
+                strcpy(temp,name);
+                strcat(temp,"1");
+                fp1 = fopen(temp,"r");
+                while((ch=fgetc(fp1))!=EOF)
+                    putchar(ch);
+                putchar('\n');
+                fclose(fp1);
+                printf("Please enter the Password :- ");
+                goto rwrong;
+            }
+            else
+            {
+                printf("\nPlease enter the correct Password :- ");
+                goto rwrong;
+            }
+        }
+        else if(counter>=3)
+        {
+            c=0;
+            printf("\nUser, you have done %d unsuccessful attempts. Did you forget your password? :- ",counter);
+            flush;
+            ch=getch();
+            if(ch=='Y' || ch=='y')
+            {
+                printf("\n\nPlease answer the security questions to reclaim your password.\n");
+                print;
+                flush;
+                getch();
+                clear;
+                strcpy(temp,name);
+                fp1 = fopen(strcat(temp,"123"),"r");
+                for(int integer=0;integer<5;integer++)
+                {
+                    flush;
+                    printf("\n%s\n",q[integer]);
+                    printf("Ans. ");
+                    flush;
+                    gets(answer);
+                    i=0;
+                    while((ch=fgetc(fp1))!='\n')
+                    {
+                        anscheck[i]=ch;
+                        i++;
+                    }
+                    anscheck[i] = '\0';
+                    if(strcmp(answer,anscheck)==0)
+                        c++;
+                    strcpy(anscheck,"");
+                    strcpy(answer,"");
+                }
+                fclose(fp1);
+                printf("\n");
+                printf("Verifying your answers.........\n");
+                for(int i=0;i<12000;i++)
+                {
+                    for(int j=0;j<60000;j++)
+                    {}
+                }
+                if(c==5)
+                {
+                    printf("User Verified\n");
+                    fp = fopen(name,"r");
+                    printf("Your Password is :- ");
+                    flush;
+                    while((ch=fgetc(fp))!='\n')
+                        putchar(ch);
+                    putchar('\n');
+                    fclose(fp);
+                    print;
+                    getch();
+                    clear;
+                    printf("Please enter your Password :- ");
+                    goto rwrong;
+                }
+                else
+                {
+                    clear;
+                    printf("Unable to Verify the User.\n");
+                    printf("Terminating your Gateway...........\n");
+                    for(int i=0;i<60000;i++)
+                    {
+                        for(int j=0;j<60000;j++)
+                        {}
+                    }
+                    clear;
+                    printf("Your session has been terminated. Please login once again\n");
+                    getch();
+                    clear;
+                    goto start;
+                }
+            }
+            else
+            {
+                clear;
+                printf("Terminating your Gateway...........\n");
+                for(int i=0;i<12000;i++)
+                {
+                    for(int j=0;j<60000;j++)
+                    {}
+                }
+                clear;
+                printf("Your session has been terminated. Please login once again\n");
+                getch();
+                clear;
+                goto start;
+            }
+        }
+        else
+        {
+            printf("\nWrong password. Please enter the correct password :- ");
+            goto rwrong;
+        }
+    }
+//_________________________________________________________________________________________________________________________________________________________________________________________________
+//_________________________________________________________________________________________________________________________________________________________________________________________________
+
+view_personal:
+    fp=fopen(strcat(name,"12"),"r");
+    printf("Profile Information :: Personal Details :\n");
+    flush;
+    while((ch=fgetc(fp))!='\n')
+        putchar(ch);
+    if((ch=fgetc(fp))==EOF)
+    {
+        fclose(fp);
+        putchar('\n');  putchar('\n');
+    }
+    else
+    {
+        printf("\nFull Name : ");
+        flush;
+        printf("%c",ch);
+        while((ch=fgetc(fp))!='\n')
+            putchar(ch);
+        putchar('\n');
+        printf("Gender : ");
+        flush;
+        while((ch=fgetc(fp))!='\n')
+            putchar(ch);
+        putchar('\n');
+        printf("Date Of Birth : ");
+        flush;
+        while((ch=fgetc(fp))!='\n')
+            putchar(ch);
+        putchar('\n');
+        printf("City : ");
+        flush;
+        while((ch=fgetc(fp))!='\n')
+            putchar(ch);
+        putchar('\n');
+        printf("State : ");
+        flush;
+        while((ch=fgetc(fp))!='\n')
+            putchar(ch);
+        putchar('\n');
+        printf("Country : ");
+        flush;
+        while((ch=fgetc(fp))!='\n')
+            putchar(ch);
+        putchar('\n');
+        printf("Contact Number : ");
+        flush;
+        while((ch=fgetc(fp))!='\n')
+            putchar(ch);
+        putchar('\n');
+        printf("E-Mail ID : ");
+        flush;
+        while((ch=fgetc(fp))!='\n')
+            putchar(ch);
+        putchar('\n');
+        fclose(fp);
+        putchar('\n');  putchar('\n');
+    }
+    printf("1. Edit your Personal Information\n");
+    printf("2. Go to the Home Page\n");
+    printf("What would you like to do? :- ");
+    flush;
+get_the_char:
+    ch=getch();
+    if(ch=='1')
+    {
+        printf("\nRedirecting to the Edit Section...........\n");
+        for(int j=0;j<48000;j++)
+        {
+            for(int k=0;k<60000;k++) {}
+        }
+        clear;
+        goto edit_personal;
+    }
+    else if(ch=='2')
+    {
+        printf("\nLogging you out of the account and redirecting to the Home Page.............\n");
+        for(int j=0;j<48000;j++)
+        {
+            for(int k=0;k<60000;k++) {}
+        }
+        clear;
+        goto start;
+    }
+    else
+    {
+        printf("Please enter a Valid choice :- ");
+        goto get_the_char;
+    }
+
+//________________________________________________________________________________________________________________________________________________________________________________________________
+//________________________________________________________________________________________________________________________________________________________________________________________________
+
+edit_personal:
+    printf("Press any key to continue");
+    flush;
+    getch();
+    clear;
+    fp = fopen(name,"w");
+    fputc('\n',fp);
+    printf("You can edit your Personal Information here : \n");
+    printf("Full Name :- ");
+    fflush(stdin);
+    gets(info);
+    fputs(info,fp);     putc('\n',fp);   strcpy(info,"");
+    printf("Gender :- ");
+    fflush(stdin);
+    gets(info);
+    fputs(info,fp);     putc('\n',fp);   strcpy(info,"");
+    printf("Date Of Birth :- ");
+    fflush(stdin);
+    gets(info);
+    fputs(info,fp);     putc('\n',fp);   strcpy(info,"");
+    printf("City :- ");
+    fflush(stdin);
+    gets(info);
+    fputs(info,fp);     putc('\n',fp);  strcpy(info,"");
+    printf("State :- ");
+    fflush(stdin);
+    gets(info);
+    fputs(info,fp);     putc('\n',fp);  strcpy(info,"");
+    printf("Country :- ");
+    fflush(stdin);
+    gets(info);
+    fputs(info,fp);     putc('\n',fp);  strcpy(info,"");
+    printf("Contact Number :- ");
+    fflush(stdin);
+take:
+    strcpy(info,"");
+    gets(info);
+    if(strlen(info)!=10)
+    {
+        printf("Please enter a valid 10 digit mobile number only :- ");
+        goto take;
+    }
+    fputs(info,fp);     putc('\n',fp);  strcpy(info,"");
+    printf("E-Mail ID :- ");
+    fflush(stdin);
+take4:
+    gets(info);
+    int b=0;
+    for(int i=0;i<2;i++)
+    {
+        if(strstr(info,email_check[i]))
+            b++;
+    }
+    if(b!=2)
+    {
+        printf("Please enter a valid Email ID :- ");
+        goto take4;
+    }
+    fputs(info,fp);     putc('\n',fp);  strcpy(info,"");
+    fclose(fp);
+    printf("Updating your Details............\n");
+    for(int j=0;j<24000;j++)
+    {
+        for(int k=0;k<60000;k++) {}
+    }
+    printf("Your Personal information has been successfully submitted.\n");
+    printf("Press any key to go to the Home Page\n");
+    getch();
+    fclose(fp);
+    clear;
+    printf("Logging you out of the Account and redirecting to the Home Page..........");
+    for(int j=0;j<48000;j++)
+    {
+        for(int k=0;k<60000;k++) {}
+    }
+    clear;
+    goto start;
+
+
+//_________________________________________________________________________________________________________________________________________________________________________________________________
+//_________________________________________________________________________________________________________________________________________________________________________________________________
+
+deactivate_account:
+
+    printf("Enter your account Username to be deactivated (Enter your AskIt ID in case of a Guest Account):- ");
+
+once_more_5:
+    flush;
+    strcpy(name,"");
+    gets(name);
+    fp1 = fopen(name,"r");
+    if(fp1==0)
+    {
+        printf("No Account found with the entered Username. Have you created an account in the Forum before? :- ");
+        fflush(stdin);
+        choice = getch();
+        if(choice == 'y' || choice == 'Y')
+        {
+            printf("Please enter your correct Username :- ");
+            goto once_more_5;
+        }
+        else
+        {
+            clear;
+            printf("Redirecting to the Signup section......");
+            for(int i=0;i<24000;i++)
+            {
+                for(int j=0;j<60000;j++)
+                {}
+            }
+            clear;
+            goto signup;
+        }
+    }
+    else
+        fclose(fp1);
+    if(strstr(name,Guest))
+    {
+        printf("Guest, are you sure to Deactivate your Account? :- ");
+        flush;
+        ch = getch();
+        if(ch=='y' || ch=='Y')
+        {
+            printf("\nDeactivating your Account..............\n");
+            remove(name);
+            for(int j=0;j<48000;j++)
+            {
+                for(int k=0;k<60000;k++) {}
+            }
+            clear;
+            printf("Account Successfully Deactivated. Hope you had a great experience learning with Me.\n");
+            print;
+            getch();
+            clear;
+            printf("Redirecting to the Home Page............");
+            for(int j=0;j<48000;j++)
+            {
+                for(int k=0;k<60000;k++) {}
+            }
+            clear;
+            goto start;
+        }
+        else
+        {
+            clear;
+            printf("Logging you out of the Account...................\n");
+            for(int j=0;j<48000;j++)
+            {
+                for(int k=0;k<60000;k++) {}
+            }
+            clear;
+            goto start;
+        }
+    }
+    printf("Enter your Password :- ");
+
+
+
+wrong_password:
+    fp1 = fopen(name,"r");
+    strcpy(password,"");
+    i=0;
+    while((ch=getch())!=13)
+    {
+        password[i]=ch;
+        i++;
+        putchar('*');
+    }
+    password[i]='\0';
+    i=0;
+    strcpy(checking2,"");
+    fflush(stdin);
+    while((ch=fgetc(fp1))!='\n')
+    {
+        checking2[i]=ch;
+        i++;
+    }
+    checking2[i]='\0';
+    if(strcmp(password,checking2)==0)
+    {
+        c4=0;
+        fclose(fp1);
+        flush;
+        printf("\n%s, are you sure you want to deactivate Your Account? :- ",name);
+        ch=getch();
+        if(ch=='y' || ch=='Y')
+        {
+            strcpy(temp,name);
+            strcat(temp,"1");
+            remove(temp);
+            remove(name);
+            strcat(temp,"2");
+            remove(temp);
+            strcat(temp,"3");
+            remove(temp);
+            strcpy(name,"");
+            strcpy(temp,"");
+            printf("\nDeactivating your Account.........");
+            for(int j=0;j<24000;j++)
+            {
+                for(int k=0;k<60000;k++){}
+            }
+            clear;
+            printf("Account Successfully Deactivated. Hope you had a great experience learning with Me.\n");
+            getch();
+            clear;
+            printf("Redirecting to the Home Page........");
+            for(int j=0;j<24000;j++)
+            {
+                for(int k=0;k<60000;k++){}
+            }
+            clear;
+            goto start;
+        }
+        else
+        {
+            printf("\nLogging you out of the Account and Redirecting to the Home Page...........\n");
+            for(int j=0;j<24000;j++)
+                {
+                    for(int k=0;k<60000;k++){}
+                }
+            clear;
+            goto start;
+        }
+    }
+    else
+    {
+        fclose(fp1);
+        c4++;
+        if(c4<3)
+        {
+            printf("\nUser, you have done %d unsuccessful attempts. Would you like to see the Password Hint? :- ",c4);
+            fflush(stdin);
+            ch = getch();
+            if(ch=='y' || ch=='Y')
+            {
+                printf("\nThe Password Hint is :- ");
+                strcpy(temp,name);
+                strcat(temp,"1");
+                fp1 = fopen(temp,"r");
+                while((ch=fgetc(fp1))!=EOF)
+                    putchar(ch);
+                putchar('\n');
+                fclose(fp1);
+                printf("Please enter the Password :- ");
+                goto wrong_password;
+            }
+            else
+            {
+                printf("\nPlease enter the correct Password :- ");
+                goto wrong_password;
+            }
+        }
+        else if(c4>=3)
+        {
+            c=0;
+            printf("\nUser, you have done %d unsuccessful attempts. Did you forget your password? :- ",c4);
+            flush;
+            ch=getch();
+            if(ch=='Y' || ch=='y')
+            {
+                printf("\n\nPlease answer the security questions to reclaim your password.\n");
+                print;
+                flush;
+                getch();
+                clear;
+                strcpy(temp,name);
+                fp1 = fopen(strcat(temp,"123"),"r");
+                for(int integer=0;integer<5;integer++)
+                {
+                    flush;
+                    printf("\n%s\n",q[integer]);
+                    printf("Ans. ");
+                    flush;
+                    gets(answer);
+                    i=0;
+                    while((ch=fgetc(fp1))!='\n')
+                    {
+                        anscheck[i]=ch;
+                        i++;
+                    }
+                    anscheck[i] = '\0';
+                    if(strcmp(answer,anscheck)==0)
+                        c++;
+                    strcpy(anscheck,"");
+                    strcpy(answer,"");
+                }
+                fclose(fp1);
+                printf("\n");
+                printf("Verifying your answers.........\n");
+                for(int i=0;i<12000;i++)
+                {
+                    for(int j=0;j<60000;j++)
+                    {}
+                }
+                if(c==5)
+                {
+                    printf("User Verified\n");
+                    fp = fopen(name,"r");
+                    printf("Your Password is :- ");
+                    flush;
+                    while((ch=fgetc(fp))!='\n')
+                        putchar(ch);
+                    putchar('\n');
+                    fclose(fp);
+                    print;
+                    getch();
+                    clear;
+                    printf("Please enter your Password :- ");
+                    goto wrong_password;
+                }
+                else
+                {
+                    clear;
+                    printf("Unable to Verify the User.\n");
+                    printf("Terminating your Gateway...........\n");
+                    for(int i=0;i<60000;i++)
+                    {
+                        for(int j=0;j<60000;j++)
+                        {}
+                    }
+                    clear;
+                    printf("Your session has been terminated. Please login once again\n");
+                    getch();
+                    clear;
+                    goto start;
+                }
+            }
+            else
+            {
+                clear;
+                printf("Terminating your Gateway...........\n");
+                for(int i=0;i<12000;i++)
+                {
+                    for(int j=0;j<60000;j++)
+                    {}
+                }
+                clear;
+                printf("Your session has been terminated. Please login once again\n");
+                getch();
+                clear;
+                goto start;
+            }
+        }
+        else
+        {
+            printf("\nLogin Unsuccessful. To Deactivate your Account, please authenticate Yourself. Please enter the correct Password :- ");
+            goto wrong_password;
+        }
+    }
+
+
+//_________________________________________________________________________________________________________________________________________________________________________________________________
+//_________________________________________________________________________________________________________________________________________________________________________________________________
+
+exit_the_app:
+    printf("User, before exiting the App, please take some time to rate my App.\n");
+    printf("Please enter your Username For Personalized Feedback Experience :- ");
+    fflush(stdin);
+    strcpy(name,"");
+here:
+    gets(name);
+    fp1 = fopen(name,"r");
+    if(fp1==0)
+    {
+        printf("Error fetching the Data. No Account found with the entered Username. Please ensure you have entered the correct Username.");
+        printf("\nWould you like to enter the Username once again? :- ");
+        ch = getch();
+        if(ch=='y' || ch=='Y')
+        {
+            printf("\nPlease enter the correct Username :- ");
+            goto here;
+        }
+        else
+        {
+            printf("\nUser, You will need to create an Account first to get Personalized Feedback Options. Would you like to create an Account? :- ");
+            ch = getch();
+            if(ch=='y' || ch=='Y')
+            {
+                clear;
+                printf("Redirecting to the SignUp Section.................\n");
+                for(int j=0;j<12000;j++)
+                {
+                    for(int k=0;k<60000;k++) {}
+                }
+                clear;
+                goto signup;
+            }
+            else
+            {
+                printf("\nUser, your response will be submitted to the General Response Section.\n");
+                fp2 = fopen("feedback.txt","a");
+                fputs("Stars :- ",fp2);
+                printf("\nUser, out of five, how many stars would you like to give to my App on an overall basis? :- ");
+do_it_again_2:
+                fflush(stdin);
+                stars = getchar();
+                int int_stars = (int) stars;
+                if(int_stars > 53)
+                {
+                    printf("%s, I know that this App is the most awesome you have ever seen. But the scale will break down for numbers greater than 5. So please enter values only till 5 :- ",temp);
+                    goto do_it_again_2;
+                }
+                else if(int_stars < 48)
+                {
+                    printf("Well, sorry to fail to impress you. But the scale to rate the weirdness of this App ends at 0. So, please rate from 0 to 5 :- ");
+                    goto do_it_again;
+                }
+                putc(stars,fp2);
+                putc('\n',fp2);
+                printf("To improve the App, your suggestions are necessary. So your suggestions are welcome :- ");
+                fputs("Suggestions :- ",fp2);
+                fflush(stdin);
+                while(1)
+                {
+                    ch = getche();
+                    if(ch==13)
+                    {
+                        break;
+                    }
+                    else
+                        fputc(ch,fp2);
+                }
+                putc('\n',fp2);
+                putc('\n',fp2);
+                fclose(fp2);
+                printf("\nSubmitting your Response.......\n");
+                for(int j=0;j<12000;j++)
+                {
+                    for(int k=0;k<60000;k++) {}
+                }
+                printf("\n\n\nThank you for rating the App and giving your Suggestion. Your response has been successfully submitted.\n");
+                printf("I am working constantly to improve this App and give you a better experience. Thanks for using the App.\n");
+                printf("Press any key to exit the App");
+                fflush(stdin);
+                getch();
+                exit(0);
+            }
+        }
+    }
+    fclose(fp1);
+    strcpy(temp,name);
+    fp = fopen(strcat(name,"feedback"),"r");
+    if(fp!=0)
+    {
+        fclose(fp);
+        fp = fopen(name,"a");
+        printf("User, it seems that you have already rated the App. Thank you for Rating. You may give further suggestions if required :- ");
+        flush;
+        while((ch=getchar())!='\n')
+            fputc(ch,fp);
+        fputc('\n',fp);
+        printf("Submitting your Suggestions..............\n");
+        for(int j=0;j<12000;j++)
+        {
+            for(int k=0;k<60000;k++) {}
+        }
+        clear;
+        fclose(fp);
+        printf("Your Response was successfully submitted. Thank you for helping in improving this App.\n");
+        printf("Press any key to Exit the App.\n");
+        flush;
+        getch();
+        exit(0);
+    }
+    else
+    {
+        fp = fopen(name,"w");
+        printf("\n%s, out of five, how many stars would you like to give to my App on an overall basis? :- ",temp);
+do_it_again:
+        fflush(stdin);
+        stars = getchar();
+        int int_stars = (int) stars;
+        if(int_stars > 53)
+        {
+            printf("%s, I know that this App is the most awesome you have ever seen. But the scale will break down for numbers greater than 5. So please enter values only till 5 :- ",temp);
+            goto do_it_again;
+        }
+        else if(int_stars < 48)
+        {
+            printf("Well, sorry to fail to impress you %s. But the scale to rate the weirdness of this App ends at 0. So, please rate from 0 to 5 :- ",temp);
+            goto do_it_again;
+        }
+        fputs("Stars :- ",fp);
+        putc(stars,fp);
+        putc('\n',fp);
+        printf("To improve the App, your suggestions are necessary. So your suggestions are welcome :- ");
+        fflush(stdin);
+        fputs("Suggestions :- ",fp);
+        while(1)
+        {
+            ch = getche();
+            if(ch==13)
+            {
+                break;
+            }
+            else
+                fputc(ch,fp);
+        }
+        putc('\n',fp);
+        fclose(fp);
+        printf("\nSubmitting your Response.......\n");
+        for(int j=0;j<12000;j++)
+        {
+            for(int k=0;k<60000;k++) {}
+        }
+        printf("\n\n\nThank you for rating the App and giving your Suggestion. Your response has been successfully submitted.\n");
+        printf("I am working constantly to improve this App and give you a better experience. Thanks for using the App.\n");
+        printf("Press any key to exit the App");
+        fflush(stdin);
+        getch();
+        exit(0);
+    }
+
+    return 0;
+}

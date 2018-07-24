@@ -5,6 +5,6 @@ This is a very basic project in C language which works on the concept of file ma
 and other basic functionalities. Here is a text file of the code which you will need to
 compile in a C compiler and then execute the file.
 
-Moreover, a text file named ID.txt needs to be placed in the folder where you are having
-the executable file of the project. ID.txt is already provided in the repository.
+Moreover, you will need to take all the files from Files directory and place it in the
+location of the executable file for the smooth working of the project.
 *****************************************************************************************
